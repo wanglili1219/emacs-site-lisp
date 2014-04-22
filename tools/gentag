@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ "$1" == "" ]; then
+    echo please input your path for tag.
+    exit -1
+fi
+
+find $1 -regex '.*\.(h|cpp|hpp|c|H|CPP|HPP|C|HPP|m|M|MM|mm|lua|LUA|py|PY)$' | etags -
+find $1 -type f | egrep '.+\.(h|cpp|hpp|c|H|CPP|HPP|C|HPP|m|M|MM|mm)$' > cscope.files
+cscope -Rb
