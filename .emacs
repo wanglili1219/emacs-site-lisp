@@ -1360,15 +1360,15 @@
         (shutdown-hook    nil)))
 
 (project-def "C2DQT"
-      '((basedir          "~/work/qt/c2dqt/c2dqt/")
+      '((basedir          "~/work/cocos2dx/cocos2d-1.0.1-x-0.12.0-qt/")
         (src-patterns     ("*.lua" "*.cpp" "*.h" "*.mm" "*.m" "*.hpp" "*.c"))
-        (ignore-patterns  ("*.svn" "*.out" "#*#" "*.o" "*.pkg" "*cscope*" "*obj*" "*vcxproj*"))
-        ;;(ignore-directorys ("*CoolBox.xcodeproj*" "*git*")) 
+        (ignore-patterns  ("git" "*.out" "#*#" "*.o" "*.pkg" "*cscope*" "*obj*" "*vcxproj*"))
+        (ignore-directorys ("*git*")) 
         ;;(search-directorys ())
         (tags-file        "~/mk-project/c2dqt/TAGS")
         (file-list-cache  "~/mk-project/c2dqt/FILES")
         (open-files-cache "~/mk-project/c2dqt/OPEN-FILES")
-        (vcs              svn)
+        (vcs              git)
         (compile-cmd      "gcc")
         (ack-args         "--cpp")
         (startup-hook     nil)
@@ -1413,3 +1413,22 @@
 (global-set-key (kbd "M-P") 'ediff-trees-examine-previous)
 (global-set-key (kbd "C-s-SPC") 'ediff-trees-examine-next-regexp)
 (global-set-key (kbd "C-S-s-SPC") 'ediff-trees-examine-previous-regexp)
+
+;;====================
+(defvar anything-cpp-show-file-function
+  '((name . "C/CPP Function")
+    (headline "^[_a-zA-Z]+.+\(.*\)")))
+
+
+(defun cpp-show-file-function ()
+  (interactive)
+  (let ((anything-candidate-number-limit 500))
+    (anything-other-buffer '(anything-cpp-show-file-function)
+                           "*C/CPP Function*")))
+
+(defun cpp-show-function-hook ()
+  ""
+  (local-set-key (kbd "\C-ccf") 'cpp-show-file-function))
+
+(add-hook 'c++-mode-hook 'cpp-show-function-hook)
+(add-hook 'c-mode-hook 'cpp-show-function-hook)
