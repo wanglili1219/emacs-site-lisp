@@ -89,8 +89,10 @@
 (cond
  ((string-equal system-type "windows-nt") ; Microsoft Windows
   (progn
+    (setenv "CYGWIN" "nodosfilewarning")
     (setenv "PATH" (concat "c:/cygwin/bin;" (getenv "PATH")))
-    (setenv "PATH" (concat "d:/home/work/tools/;" (getenv "PATH")))
+    (setenv "PATH" (concat "d:/home/work/tools/;c:/Qt/4.8.5/qmake;" (getenv "PATH")))
+    (setenv "QMAKESPEC" "c:/Qt/4.8.5/mkspecs/win32-g++-4.6/")
     (setq explicit-shell-file-name "bash.exe")
     (setq exec-path (cons "c:/cygwin/bin/" exec-path))))
  ((or (string-equal system-type "darwin")   ; Mac OS X
@@ -1101,17 +1103,6 @@
 ;; (change-cursor-mode 1) ; On for overwrite/read-only/input mode
 ;; (toggle-cursor-type-when-idle 1) ; On when idle
 
-;; 鹿  Emacs-w3m盲炉   酶 鲁
-;; (add-to-list 'load-path "~/emacs/site-lisp/w3m")
-;; (require 'w3m-load)
-;; (require 'w3m-e21)
-;; (provide 'w3m-e23)
-;; (setq w3m-use-favicon nil)
-;; (setq w3m-command-arguments '("-cookie" "-F"))
-;; (setq w3m-use-cookies t)
-;; (setq w3m-home-page "http://www.google.com")
-
-;; (setq w3m-display-inline-image t)
 
 ;; 么露炉潞 鲁玫 录禄炉w3m.el
 ;;(add-to-list 'exec-path "D:/w3m-0.5.1-2/usr/bin")
@@ -1133,8 +1124,8 @@
 ;; 猫露篓w3m 录卤锚 霉    录镁录 
 ;(setq w3m-icon-directory "/home/jerry/software/xemacs/w3m/emacs-w3m-1.4.4/icons")
 ;;   戮 录卤锚
-(setq w3m-show-graphic-icons-in-header-line t)
-(setq w3m-show-graphic-icons-in-mode-line t)
+;;(setq w3m-show-graphic-icons-in-header-line t)
+;;(setq w3m-show-graphic-icons-in-mode-line t)
 ;; 猫露篓w3m    碌 虏  媒拢卢路 卤冒 陋 鹿  cookie潞  鹿  驴貌录 
 (setq w3m-command-arguments '("-cookie" "-F"))
 ;;  w3m盲炉   酶 鲁 卤 虏   戮 录 卢
@@ -1417,7 +1408,7 @@
 ;;====================
 (defvar anything-cpp-show-file-function
   '((name . "C/CPP Function")
-    (headline "^[_a-zA-Z]+.+\(.*\)")))
+    (headline "[ _a-zA-Z]*\(.*\)")))
 
 
 (defun cpp-show-file-function ()
