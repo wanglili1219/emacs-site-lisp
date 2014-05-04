@@ -5,6 +5,20 @@ if [ "$1" == "" ]; then
     exit -1
 fi
 
-find $1 -regex '.*\.(h|cpp|hpp|c|H|CPP|HPP|C|HPP|m|M|MM|mm|lua|LUA|py|PY)$' | etags -
-find $1 -type f | egrep '.+\.(h|cpp|hpp|c|H|CPP|HPP|C|HPP|m|M|MM|mm)$' > cscope.files
+if [ $# == 0 ]; then
+    echo please input your path for tag.
+    exit -1
+fi
+
+for path in $*
+do
+    #mac/linux as following
+    #find -E $path -regex '.*\.(h|cpp|hpp|c|H|CPP|HPP|C|HPP|m|M|MM|mm|lua|LUA|py|PY)$' | etags -a -
+
+    find $path -regex '.*\.\(h\|cpp\|hpp\|c\|H\|CPP\|HPP\|C\|HPP\|m\|M\|MM\|mm\|lua\|LUA\|py\|PY\)$' | etags -a -
+    find $path -type f | egrep '.+\.(h|cpp|hpp|c|H|CPP|HPP|C|HPP|m|M|MM|mm)$' >> cscope.files
+done
+
 cscope -Rb
+
+echo "ALL DONE!"
