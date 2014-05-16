@@ -642,9 +642,6 @@
 (setq sdcv-program-path "C:/StarDict/stardict.exe")
 (require 'emacs-rc-sdcv)
 
-;; the font for Chinese ;
-(set-language-environment 'Chinese-GB )
-
 ;;;php
 (require 'php-mode)
 
@@ -693,6 +690,9 @@
 (global-set-key (kbd "C-c p h") 'project-home)
 (global-set-key (kbd "C-c p d") 'project-dired)
 (global-set-key (kbd "C-c p t") 'project-tags)
+
+(if (file-exists-p "~/mk-project/proj_def.el")
+    (load-file "~/mk-project/proj_def.el"))
 
 (project-def "SlotsQueen"
       '((basedir          "/Users/renren/work/renren/client/SlotsQueen/")
@@ -943,3 +943,22 @@
 
 (global-set-key (kbd "C-c f u") 'replace-path-split-char-region-un)
 (global-set-key (kbd "C-c f w") 'replace-path-split-char-region-win)
+
+;; coding
+;;====================
+;; ;;(setq default-frame-alist (append '((font . "fontset-mymono")) default-frame-alist))
+;; ;;(set-default-font "fontset-mymono")
+(set-language-environment 'UTF-8) 
+;; ;(set-keyboard-coding-system 'utf-8)
+(set-clipboard-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+;; (set-selection-coding-system 'utf-8)
+;; (modify-coding-system-alist 'process "*" 'utf-8)
+;; (setq default-process-coding-system '(utf-8 . utf-8)) -- not use, else shell break down
+;;(setq-default pathname-coding-system 'utf-8)
+(set-file-name-coding-system 'chinese-iso-8bit)
+;; ;(setq ansi-color-for-comint-mode t)
+
+

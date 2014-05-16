@@ -35,8 +35,11 @@
         (setq sdcv-string (shell-command-to-string
                            (concat "/usr/bin/sdcv " " -n --utf8-output --utf8-input " searchword)))
         (setq dict-sp (string-match "-->\u725b\u6d25\u73b0\u4ee3\u82f1\u6c49\u53cc\u89e3\u8bcd\u5178" sdcv-string))
-        (insert (substring sdcv-string 0 dict-sp))
-        (setq sdcv-string (substring sdcv-string dict-sp))
+        
+        (if (not (null dict-sp))
+            (insert (substring sdcv-string 0 dict-sp))
+          (setq sdcv-string (substring sdcv-string dict-sp)))
+        
         (setq sdcv-field (split-string sdcv-string "\n"))
         (mapcar (lambda (one-field)
                   (if (not (and (> (length one-field) 0)
